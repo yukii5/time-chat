@@ -1,0 +1,95 @@
+<section class="hero is-success">
+    <div class="containertitle">
+          Details
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-7">
+        <div class="card">
+              <div class="box21">
+          <p id="notice"><%= notice %></p>
+          <div class="card-content">
+            <div class="media">
+              <div class="media-content">
+
+                <p>
+                  <strong class ="att1">名前</strong>
+                   <div class ="att2"><%= @attendance.user.username %></div>
+                </p>
+              </div>
+            </div>
+            <div class="media">
+              <div class="media-content">
+                <p>
+                  <strong class="att1">タイトル</strong>
+                   <div class ="att2"><%= @attendance.title %>
+              </div>
+                </p>
+              </div>
+            </div>
+            <div class="content">
+              <table class="table is-narrow">
+                <tr>
+                  <p>
+                    <strong class="att1">開始時間</strong>
+                    <div class ="att2"><%= @attendance.start_time.strftime("%Y-%m-%d %H:%M") %>
+                   </div>
+                  </p>  
+                </tr>
+              </table>
+            </div>
+            <div class="content">
+              <table class="table is-narrow">
+                <tr>
+                  <p>
+                  <div class ="att2">
+                    <strong class="att1">終了時間</strong>
+                    <div class ="att2">
+                    <%= @attendance.last_time.strftime("%Y-%m-%d %H:%M") %></div>
+                  </p>
+                </tr>
+              </table>
+            </div>
+            <div class="content">
+              <table class="table is-narrow">
+              <tr>
+                <p>
+                  <strong class="att1">備考欄</strong>
+                  <%= simple_format @attendance.content, class: "att3" %>
+                </p>
+              </tr>
+              <strong class="att1">更新日</strong>
+                <div class ="att2"><time><%= @attendance.updated_at.strftime("%Y-%m-%d %H:%M") %></time></div>
+             </table>
+                    </div>
+ 
+    <div class="column is-7">
+        <article class="panel is-warning">
+          <p class="panel-heading">
+                <i class="fas fa-user" aria-hidden="true"></i>
+            <%= link_to user_path(@attendance.user) do %>
+              <%= @attendance.user.username %>さんのページへ
+            <% end %>
+              <span class="panel-icon">
+          </p>
+        </article>
+    </div>
+    </div>
+            </div>
+          </div>
+        </div>
+      </div>
+             <% if @attendance.user.id == current_user.id %>
+                                 <div class="submit">
+                    <%#= f.submit "更新",class: "btn-circle-fishy" %>
+                <%= link_to "編集画面へ", edit_attendance_path(@attendance), class: "btn-circle-fishy" %>  
+                  </div>
+             <% end %>
+      </div>
+    </div>
+  </div>
+</section>

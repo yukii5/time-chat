@@ -1,0 +1,47 @@
+  <section class="hero is-success">
+    <div class="containertitle">
+      User editing
+  </div>
+  </div>
+</section>
+
+<% if @user.errors.any? %>
+  <div class="notification is-danger">
+    <h2><%= pluralize(@user.errors.count, "error") %> 保存ができませんでした</h2>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-20">
+        <%= form_for @user do |f| %>
+        <div class = "field">
+<div class="sample_box">
+        <div class="sample_box12">
+<div class="sample_box12_tape"> </div>
+<p class="sample_box12_title"><b>名前</b></p>
+<p class="sample_box12_subtitle"><%= f.label :username %></p><p><%= f.text_field :username, class: "labelis" %></p>
+</div>
+
+            <div class="sample_box13">
+<div class="sample_box13_tape"> </div>
+<p class="sample_box13_title"><b>メールアドレス</b></p>
+<p class="sample_box13_subtitle"><%= f.label :email %></p><p><%= f.text_field :email, class: "labelis" %></p>
+</div>
+<div class ="submitmajin">
+                    <div class="submit">
+                    <%= f.submit "更新",class: "btn-circle-fishy" %>
+                    </div>
+                  </div>
+</div>
+        </div>
+        <% end %>
+    </div>
+  </div>
+</section>

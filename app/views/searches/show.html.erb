@@ -1,0 +1,84 @@
+<body onLoad="document.all.jikkou.click();" >
+
+<div class = address>
+<div class = code>
+<i class="fas fa-building" aria-hidden="true"></i>
+会社名<br>
+<%= @search.company %>
+<br>
+<b>〒&nbsp;</b>郵便番号<br>
+<% @search.postal_code.to_s.insert(3, "-")%>
+<%= @search.postal_code %><br>
+<i class="fas fa-home" aria-hidden="true"></i>
+住所<br>
+<%= @search.address1 %>
+<%= @search.address2 %>
+<%= @search.address3 %>
+<%= @search.building_name %><br>
+<i class="fas fa-phone" aria-hidden="true"></i>
+電話番号<br>
+<%= @search.phone_number %>
+<br>
+<% if user_signed_in? %>
+
+<% if @search.user.id == current_user.id %>
+<%= link_to  "新規登録", search_searches_path,class: "button is-info",data: {"turbolinks" => false}  %>
+<%= link_to  "編集", edit_search_path(@search),class: "button is-success",data: {"turbolinks" => false} %>
+<%= link_to  "削除", search_path(@search),method: :delete,class: "button is-danger",data: { confirm: '本当に削除してよろしでしょうか?' } %>
+<% end %>
+<% else%>
+
+<% end %>
+</div>
+<div class = map>
+<div class = map1>
+<input id="address" type="textbox" value="<%= @search.postal_code %>" class="map2">
+<input type="button" value="検索"  id="jikkou" onclick="codeAddress()" class="button is-black">
+</div>
+<div id='map'></div>
+
+<style>
+#map {
+  height: 100vh;
+  width: 100%;
+}
+</style>
+
+<script>
+let map
+
+function initMap(){
+  geocoder = new google.maps.Geocoder()
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 34.663742, lng:135.500956},
+    zoom: 17,
+  });
+
+  marker = new google.maps.Marker({
+    position:  {lat: 34.663742, lng:135.500956},
+    map: map
+  });
+}
+let geocoder
+
+function codeAddress(){
+  let inputAddress = document.getElementById('address').value;
+
+  geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+    if (status == 'OK') {
+      map.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+        map: map,
+          position: results[0].geometry.location
+      });
+    } else {
+      alert('該当する結果がありませんでした：' + status);
+    }
+  });   
+}
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB67utEpvVAWTBLD0cRokMMdpgDLt2g2WM&callback=initMap" async defer></script>
+</div>
+</body>

@@ -1,0 +1,67 @@
+
+
+<div class="container2">
+        <section class="section2"> 
+            <div class="contactform">
+            <div class="textnum1">顧客登録&emsp;〜New Customer〜</div>
+                    <%= form_with url:search_searches_path, method: :get, local: true do |f| %>
+          <%= f.label :postal_code,"郵便番号検索",class: "textnum" %>
+          <%= f.text_field :postal_code, class: "search_form",value:@zipcode, placeholder: "5420076", class: "form-fields" %>
+          <br>
+          <button class="form-fields button" value="Send" type="submit" >search <i class="fa fa-search"></i></button>
+            <% end %>
+                <%= form_with(model: @search, local: true) do |f| %>
+                          <%= f.label :postal_code,"郵便番号",class: "textnum" %>
+          <%= f.text_field :postal_code, class: "search_form",value:@zipcode, placeholder: "5420076", class: "form-fields" %>
+                    <%= f.label :address1,"都道府県",class: "textnum" %>
+          <%= f.text_field :address1, class: "search_form",value:@address1, placeholder: "大阪府", class: "form-fields" %>
+          <%= f.label :address2,"市区町村",class: "textnum" %>
+          <%= f.text_field :address2, class: "search_form",value:@address2, placeholder: "大阪市中央区", class: "form-fields" %>
+          <%= f.label :address3,"町域",class: "textnum" %>
+          <%= f.text_field :address3, class: "search_form",value:@address3, placeholder: "難波 5-1-60", class: "form-fields" %>
+          <%= f.label :building_name,"建物名",class: "textnum" %>
+          <%= f.text_field :building_name, class: "search_form",placeholder: "なんばスカイオ 15階", class: "form-fields"%>
+          <%= f.label :phone_number,"電話番号",class: "textnum" %>
+          <%= f.text_field :phone_number, class: "search_form",placeholder: "050-3187-577", class: "form-fields" %>
+    
+          <%= f.label :family_name,"お名前",class: "textnum" %>
+          <div class='form-text-wrap'>
+          <%= f.text_field :family_name, class: "search_form",placeholder: "真子", class: "form-fields1"%>&emsp;
+          <%= f.text_field :first_name, class: "search_form",placeholder: "就有", class: "form-fields1" %>
+          <br>
+          </div>
+          <%= f.label :family_name_kana,"フリカナ",class: "textnum" %>
+          <div class='form-text-wrap'>
+          <%= f.text_field :family_name_kana, class: "search_form",placeholder: "マコ", class: "form-fields1" %>&emsp;
+          <%= f.text_field :first_name_kana, class: "search_form",placeholder: "ナリユキ", class: "form-fields1" %>
+          </div>
+            <div class="form-group">
+                  <%= f.label :age,"生年月日/性別",class: "textnum" %>
+                <div class='input-form-fields'>
+                  <%= raw sprintf(
+                    f.date_select(
+                      :age,
+                    class:'select-birth',
+                    id:"birth-date",
+                    use_month_numbers: true,
+                    prompt:'--',
+                    start_year: 1930,
+                    end_year: (Time.now.year),
+                    date_separator: '%s'),
+                  "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" %>
+          <%= f.collection_select(:sex_id, Sex.all, :id, :name, {}, {class:"sex-select"}) %>
+          </div>
+  </div>
+          <%= f.label :company,"会社",class: "textnum" %>
+          <%= f.text_field :company, class: "search_form",placeholder: "株式会社div", class: "form-fields" %>
+          <%= f.label :position,"役職",class: "textnum" %>
+          <%= f.text_field :position, class: "search_form",placeholder: "代表取締役", class: "form-fields" %>
+          <br>
+          <button class="form-fields button" value="Send" type="submit" >Send <i class="fa fa-paper-plane"></i></button>
+            </div>
+             <% end %>
+            <script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script><div class="contmap" style='overflow:hidden;height:100%;width:100%;'><div id='gmap_canvas' style='height:100%;width:100%;'></div><div><small><a href="http://embedgooglemaps.com">                                  embed google maps                           </a></small></div><div><small><a href="http://freedirectorysubmissionsites.com/">free web directories</a></small></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div><script type='text/javascript'>function init_map(){var myOptions = {zoom:14,center:new google.maps.LatLng(34.663742,135.500956),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(34.663742,135.500956)});infowindow = new google.maps.InfoWindow({content:'<strong>My Location</strong><br>mumbai<br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB67utEpvVAWTBLD0cRokMMdpgDLt2g2WM&callback=initMap" async defer></script>
+
+        </section>
+</div>

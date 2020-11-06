@@ -1,0 +1,95 @@
+<% if @user.id == current_user.id %>
+<section class="hero is-success">
+    <div class="containertitle">
+        My page
+  </div>
+</section>
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="columns is-centered">
+          <div class="column is-20">
+            <table class="table is-fullwidth">
+              <tr>
+
+                  <div class="sample_box">
+                  <div class="sample_box12">
+                  <div class="sample_box12_tape"> </div>
+                  <p class="sample_box12_title"><b>名前</b></p>
+                  <p class="sample_box12_subtitle">Username</p><p class="sample_box12_title"><%= @user.username %></p>
+                  
+                  </div>
+
+                  <div class="sample_box13">
+                  <div class="sample_box13_tape"> </div>
+                  <p class="sample_box13_title"><b>メールアドレス</b></p>
+                  <p class="sample_box13_subtitle">Email</p><p class="sample_box13_title"><%= @user.email %></p>
+                  </div>
+                  <div class ="submitmajin">
+                    <div class="submit">
+                    <%= link_to "編集", edit_user_path(@user), class: "btn-circle-fishy" %>
+                    </div>
+                  </div>
+                  </div>
+
+                  
+                <% else %>
+                <section class="hero is-danger">
+                  <div class="hero-body">
+                    <div class="container">
+                      <h1 class="title">
+                  <%= link_to "戻る", "http://localhost:3000/searches/1", class: "button is-primary" %>
+                      本人のみ閲覧可能です
+                      </h1>
+                    </div>
+                  </div>
+                </section>
+                <% end %>
+                </tr>
+            </table>
+            <table class="table is-fullwidth">
+              <tr>
+              </tr>
+            </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<section class="section">
+ <div class="container">
+  <div class="columns is-multiline">
+    <table class="table is-fullwidth">
+     <% @user.attendances.each do |attendance| %>
+      <div class="boxmi12">
+       <div class="boxmi12-title"><%= attendance.title %></div>
+        <div class="card-content">
+          <i class="fas fa-calendar" aria-hidden="true"> &ensp;開始時刻:</i>
+            <%= attendance.start_time.strftime("%Y-%m-%d %H:%M")  %>
+              <br>
+            <i class="fas fa-calendar" aria-hidden="true"> &ensp;終了時刻:</i>
+              <%= attendance.last_time.strftime("%Y-%m-%d %H:%M") %>
+              <br>
+              <%= link_to  attendance_path(attendance) do %>
+                <i class="fas fa-book" aria-hidden="true"></i>詳細ページへ
+              <% end %>
+              <br>
+              <%= link_to edit_attendance_path(attendance) do %>
+                  <i class="fas fa-edit"></i>スケジュール編集ページへ
+              <% end %>
+              <br>
+              <%= link_to attendance_path(attendance),method: :delete, data: {confirm: "削除しますか？"} do %>
+                 <i class="fas fa-trash"></i>削除する
+              <% end %>
+            <div class="content">
+              更新日:<time><%= attendance.updated_at.strftime("%Y-%m-%d %H:%M") %></time>
+            </div>
+         </div>
+        </div>
+       </div>
+      <% end %>
+    </table>
+  </div>
+ </div>
+</section>

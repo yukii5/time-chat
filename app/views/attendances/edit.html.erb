@@ -1,0 +1,54 @@
+<section class="hero is-success">
+    <div class="containertitle">
+    Schedule editing
+      
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-6">
+        <%= form_with(model: @attendance, local: true) do |form| %>
+          <div class="titles">
+          <%= current_user.username %>
+          </div>
+
+          <div class="time-title">
+          <p><%= form.label :title,"タイトル"%></p>
+          </div>
+            <%= form.text_field :title, class: "titleis" %>
+
+
+            <div class="time-title">
+            <P><%= form.label :start_time,"開始時刻" %></p>
+            </div>
+          <div class="time">
+            <%= form.datetime_select :start_time %>
+          </div>
+
+            <div class="time-title">
+             <p><%= form.label :last_time,"終了時刻" %></p>
+            </div>
+          <div class="time">
+            <%= form.datetime_select :last_time %>
+          </div>
+
+          <div class="time-title">
+            <p><%= form.label :content,"備考欄"%></p>
+          </div>
+          <div class="content">
+            <%= form.text_area :content, class: "form-control" %>
+          </div>
+
+
+          <div class="submit">
+            <%= form.submit "更新", class:"btn-circle-fishy" %>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

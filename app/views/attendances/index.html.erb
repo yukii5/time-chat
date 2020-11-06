@@ -1,0 +1,87 @@
+<section class="hero is-success">
+    <div class="containertitle">
+       calendar
+
+      
+  </div>
+</section>
+
+
+<table>
+ <thead class = "category">
+    <tr>
+      <th><i class="fas fa-user"></i>名前</th>
+      <th><i class="fas fa-signature"></i>タイトル</th>
+      <th><i class="fas fa-hourglass-start"></i>開始時刻</th>
+      <th><i class="fas fa-hourglass-end"></i>終了時刻</th>
+      <th></th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @attendances.each do |attendance| %>
+      <tr>
+        <th class = addless><%= attendance.user.username %></th> 
+        <th class = addless><%= attendance.title %></th> 
+        <th class = addless><%= attendance.start_time.strftime("%Y-%m-%d %H:%M")%></th>
+        <th class = addless><%= attendance.last_time.strftime("%Y-%m-%d %H:%M") %></th>
+        <td><%= link_to '詳細', attendance,class: "button is-info" %></td>
+        <td><%= link_to '編集', edit_attendance_path(attendance.id),class: "button is-success" %></td>
+        <td><%= link_to '削除',attendance_path(attendance.id), method: :delete, class: "button is-danger", data: { confirm: '本当に削除してよろしでしょうか?'  } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<div class = "weekbtn">
+<input type="radio" name="btn"  id="a"/><label class ="labeles" for="a">月間</label>
+
+<input type="radio" name="btn"  id="b"/><label class ="labeles" for="b">週間</label>
+
+<input type="radio" name="btn" id="c"/><label class ="labeles" for="c">日別</label>
+<div class = "attendancesnew">
+<%= link_to '新規スケジュール投稿', new_attendance_path %>
+</div>
+</div>
+
+<div class="text text01">
+<%= month_calendar events: @attendances do |date, attendances| %>
+  <div class="title is-5"> <%= date.day %></div>
+ 
+  <% attendances.each do |attendance| %>
+    <div>
+      <%= link_to attendance.user.username, attendance %>
+    </div>
+  <% end %>
+  <% end %>
+  </div>
+
+<div class="text text02">
+<%= week_calendar events: @attendances do |date, attendances| %>
+  <div class="title is-5"> <%= date.day %></div>
+
+  <% attendances.each do |attendance| %>
+    <div>
+      <%= link_to attendance.user.username, attendance %>
+    </div>
+  <% end %>
+<% end %>
+</div>
+
+<div class="text text03">
+<%= calendar number_of_days: 1, events:  @attendances do |date, attendances| %>
+  <div class="title is-5"> <%= date.day %></div>
+
+  <% attendances.each do |attendance| %>
+    <div>
+      <%= link_to attendance.user.username, attendance %>
+      <%= link_to attendance.start_time.strftime("%Y-%m-%d %H:%M"), attendance %>
+      <%= link_to attendance.last_time.strftime("%Y-%m-%d %H:%M"), attendance %>
+
+    </div>
+  <% end %>
+
+  <%= timeline attendances.map{|attendance| [attendance.user.username, attendance.start_time, attendance.last_time] } %>
+  <% end %>
+</div>

@@ -1,0 +1,62 @@
+<%= search_form_for @product do |f| %>
+<div class = "sea2">
+  <%= f.search_field :family_name_or_first_name_or_family_name_kana_or_first_name_kana_or_company_or_position_or_postal_code_or_address1_or_address2_or_address3_or_building_name_or_phone_number_cont, placeholder: "キーワード検索", class: "sea1" %>
+  <button class="form-fields button is-black" value="Send" type="submit">検索 <i class="fa fa-search"></i></button>
+  <div class="box28">
+    <div class="box-title">並び替え<i class="fa-sort"></i></div>
+    <tr>
+    <th><%= sort_link(@product, :family_name, "名前順") %> &ensp; </th>
+    <th><%= sort_link(@product, :age, "年齢順") %> &ensp;</th>
+    <th><%= sort_link(@product, :sex_id, "性別順") %></th>
+  </tr>
+</div>
+<% end %>
+</div>
+<table>
+  <thead class = "category">
+    <tr> 
+     <th><i class="fas fa-user"></i>
+      名前</th>
+      <th>フリカナ</th>
+      <th><i class="fas fa-venus-mars"></i>
+       性別</th>
+      <th>年齢</th>
+      <th><i class="fas fa-building"></i>
+      会社名</th>
+      <th>役職</th>
+      <th><b>〒</b>郵便番号</th>
+      <th><i class="fas fa-map-marker-alt"></i>
+      住所</th>
+      <th><i class="fas fa-phone"></i>
+      電話番号</th>
+      <th colspan="9"></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @searches.each do|search| %>
+  <tr>
+    <th class = addless><%= search.family_name %>
+        <%= search.first_name %> &emsp;</th>
+    <th class = addless><%= search.family_name_kana %>
+        <%= search.first_name_kana %> &emsp;</th>
+    <th class = addless><%= search.sex.name %> &emsp;</th>
+    <% if search.age == nil %>
+    <th class = addless><%= "" %>
+    <% else %>
+    <th class = addless><%= "#{Time.now.year - search.age.year}歳" %> &emsp;</th>
+    <% end %>
+    <th class = addless><%= search.company %> &emsp;</th>
+    <th class = addless><%= search.position %></th>
+    <% search.postal_code.to_s.insert(3, "-")%>
+    <th class = addless><%= search.postal_code %> &emsp;</th>
+    <th class = addless><%= search.address1 %>
+    <%= search.address2 %>
+    <%= search.address3 %>
+    <%= search.building_name %> &emsp;</th>
+    <th class = addless><%= search.phone_number %></th>
+    <th><%= link_to '編集', edit_search_path(search.id),class: "button is-success",data: {"turbolinks" => false} %>&nbsp;</th>
+    <th><%= link_to '削除',search_path(search.id), method: :delete,class: "button is-danger", data: { confirm: '本当に削除してよろしでしょうか?' } %></th>
+  </tr>
+    <% end %>
+  </tbody>
+</table>

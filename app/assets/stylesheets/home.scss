@@ -1,0 +1,47 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.section {
+  height: 100%;
+  width: 100%;
+	background-image: url(Schedule.jpg);
+	background-repeat: no-repeat;
+
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  background-color: gray;
+}
+
+.container {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.search_form{
+  width: 400px;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 3px;
+  border: 2px solid #ddd;
+}
+
+
+.type-mask h1{
+  -webkit-animation: scrollmask 10s ease 1.5s infinite;
+  -webkit-background-clip: text;
+  background-image: url("/assets/title2.jpg");
+  color: transparent;
+  font-size: 150px;
+}
+@-webkit-keyframes scrollmask {
+  0% {background-position: 0 0;}
+  100% {background-position: 100% 0;}
+}
+
+.type-mask{
+  text-align: center;
+}

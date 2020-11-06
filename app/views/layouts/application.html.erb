@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TimeChat</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha256-UzFD2WYH2U1dQpKDjjZK72VtPeWP50NoJjd26rnAdUI=" crossorigin="anonymous" />
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+   <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+
+  </head>
+
+  <body>
+   <% if flash[:notice] %>
+    <div class="notification is-info">
+      <p class="notice"><%= notice %></p>
+    </div>
+  <% end %>
+
+   <% if flash[:alert] %>
+    <div class="notification is-danger">
+      <p class="alert"><%= alert %></p>
+    </div>
+   <% end %>
+   <% if user_signed_in? %>
+   
+   <nav class="navbar is-warning">
+      <div class="navbar-brand">
+       <div id="nav-drawer">
+      <input id="nav-input" type="checkbox" class="nav-unshown">
+      <label id="nav-open" for="nav-input"><span></span></label>
+      <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+      <div id="nav-content">
+      <% if user_signed_in? %>
+
+                <div class = "username">
+           <h1 class="title is-4" style="font-family: serif;">
+           <%= current_user.username %>さんのページ</h1>
+          </div>
+          <div class="navbar-item ">
+            <%= link_to "カレンダー", attendances_path, class: "navbar-item button has-text-black  is-warning is-light " %>
+          </div>
+          <div class="navbar-item">
+            <%= link_to "スケジュール投稿", new_attendance_path, class: "navbar-item button has-text-black is-warning is-light" %>
+          </div>
+          <div class="navbar-item">
+                   <%= link_to  "スケジュール一覧", users_path, class: "button is-warning has-text-black is-light" %>
+          </div>
+            <% if current_user.admin? && !(@user == current_user) %>
+                <div class="navbar-item">
+                <%= link_to "顧客一覧", searches_path, class: "button is-warning has-text-black is-light" %>
+                </div>
+                <div class="navbar-item">
+                <%= link_to "顧客登録", search_searches_path, class: "button is-warning has-text-black is-light",data: {"turbolinks" => false}%>
+                </div>
+            <% end %>
+            <div class="navbar-item">
+              <%= link_to "マイページ", user_path(current_user), class: "button is-warning has-text-black is-light" %>
+            </div>
+            <div class="navbar-item">
+              <%= link_to  "ログアウト", destroy_user_session_path, method: :delete, class: "button is-warning has-text-black is-light" %>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% else %>
+        <div id="navbarExampleTransparentExample" class="navbar-menu">
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="field is-grouped">
+                <p class="control">
+                    <%= link_to  "ログイン", new_user_session_path, class: "button is-warning is-light" %>
+                    <%= link_to  "新規登録", new_user_registration_path, class: "button is-warning is-light" %>
+                    </p>
+              </div>
+            </div>
+          </div>
+        </div>
+<% end %>
+      </div>
+  </div>
+        <%= link_to search_path(1), class: "navbar-item" do %>
+          <h1 class="title is-2" style="font-family: cursive;">TimeChat</h1>
+       </div>
+    <% end %>
+    <% else%>
+       <nav class="navbar is-warning">
+      <div class="navbar-brand">
+         <%= link_to root_path, class: "navbar-item" do %>
+          <h1 class="title is-2" style="font-family: cursive;">TimeChat</h1>
+       </div>
+    <% end %>
+   <% end %>
+        
+      </div>
+<% if user_signed_in? %>
+  <div id="navbarExampleTransparentExample" class="navbar-menu">
+    <div class="navbar-item">
+        <%= link_to "カレンダー", attendances_path, class: "navbar-item button is-warning is-light" %>
+      </div>
+      <div class="navbar-item">
+        <%= link_to "スケジュール投稿", new_attendance_path, class: "navbar-item button is-warning is-light" %>
+      </div>
+      <div class="navbar-item">
+          <%= link_to  "スケジュール一覧", users_path, class: "button is-warning is-light" %>
+      </div>
+      
+      <div class = "username">
+        <h1 class="title is-3" style="font-family: serif;">
+        <%= current_user.username %>さんのページ</h1>
+    </div>
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="field is-grouped">
+            <% if current_user.admin? && !(@user == current_user) %>
+              <p class = "control">
+              <%= link_to "顧客一覧", searches_path, class: "button is-warning is-light" %>
+              </p>
+              <p class = "control">
+              <%= link_to "顧客登録", search_searches_path, class: "button is-warning is-light",data: {"turbolinks" => false} %>
+              </p>
+            <% end %>
+            <p class = "control">
+              <%= link_to "マイページ", user_path(current_user), class: "button is-warning is-light" %>
+            </p>
+            <p class = "control">
+              <%= link_to  "ログアウト", destroy_user_session_path, method: :delete, class: "button is-warning is-light" %>
+            </p>
+        </div>
+      </div>
+            </div>
+          </div>
+<% else %>
+  <div id="navbarExampleTransparentExample" class="navbar-menu">
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <p class="control">
+              <%= link_to  "ログイン", new_user_session_path, class: "button is-warning is-light" %>
+              <%= link_to  "新規登録", new_user_registration_path, class: "button is-warning is-light" %>
+              </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+    </nav>
+    <%= yield %>
+  </body>
+</html>
