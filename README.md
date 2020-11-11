@@ -15,6 +15,20 @@ TimeーChat
 [GoogleMap](https://i.gyazo.com/c63291d9c4955085c088e7f6aaea7e66.mp4)
 [検索・並び替え](https://i.gyazo.com/c4c9be71b09f7c814eca353219ee1795.mp4)
 
+### 接続先情報
+https://time-chat.herokuapp.com/
+## Herokuでデプロイしているため、Herokuの仕様により本番環境にアクセス頂いた際に画像リンクが切れている可能性がございます。
+ID/Pass
+ID: admin
+Pass: 2222
+ ### テスト用アカウント等
+管理者用
+メールアドレス: master@master
+パスワード: 123456789
+出品者用
+メールアドレス名: test@testパスワード: 123456789
+
+
 ## 機能
 -ユーザーログイン機能
 - カレンダーにシフトを投稿する機能
