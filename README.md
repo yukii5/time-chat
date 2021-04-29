@@ -20,10 +20,10 @@ TimeーChat
 
 ***デモ***
 
-![トップページ]("image/toppage.jpg")
-![ハンバーガーメニュー]("image/toppage.gif")
-![カレンダー]("image/calendar.png")
-![LINE_BOT]("image/line_bot.gif")
+![top page](https://user-images.githubusercontent.com/71483628/116502780-6fb95880-a8ef-11eb-8f32-dbb532c9af1a.jpg)
+![hamburger](https://user-images.githubusercontent.com/71483628/116502700-354fbb80-a8ef-11eb-9258-fd8a5492c98c.gif)
+![calendar](https://user-images.githubusercontent.com/71483628/116502811-8790dc80-a8ef-11eb-9b84-40e2b2f77cf4.png)
+![line_bot](https://user-images.githubusercontent.com/71483628/116502694-2ff27100-a8ef-11eb-95d6-338a570d7abe.gif)
 
 ### 接続先情報
 https://time-chat.herokuapp.com/
