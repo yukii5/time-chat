@@ -20,10 +20,10 @@ TimeーChat
 
 ***デモ***
 
-![トップページ](https://i.gyazo.com/9130d35f803b8a678aff2ef18b531285.jpg)
-![ハンバーガーメニュー](https://i.gyazo.com/b808acff7b1126e8292127d80c8af245.mp4)
-![カレンダー](https://i.gyazo.com/c01ae84b95143b857c3ff716c6bd9790.png)
-![LINE_BOT](https://i.gyazo.com/ba0e6d7776aa69ca90ffe4b8259c6b1b.mp4)
+![トップページ]("image/toppage.jpg")
+![ハンバーガーメニュー]("image/toppage.gif")
+![カレンダー]("image/calendar.png")
+![LINE_BOT]("image/line_bot.gif")
 
 ### 接続先情報
 https://time-chat.herokuapp.com/
